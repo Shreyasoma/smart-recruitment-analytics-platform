@@ -4,7 +4,7 @@ CREATE TYPE status_type AS ENUM ('applied', 'interviewing', 'hired', 'rejected')
 
 -- Then create tables
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE, password VARCHAR(255), role role_type, created_at TIMESTAMP DEFAULT NOW(), updated_at TIMESTAMP DEFAULT NOW()
+  id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE, password VARCHAR(255), role role_type DEFAULT 'recruiter', created_at TIMESTAMP DEFAULT NOW(), updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE candidates (

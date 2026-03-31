@@ -132,12 +132,13 @@ Foreign key rules:
 
 ### Progress
 
-- [✅] Folder structure
-- [✅] Express server setup
-- [✅] Environment variables
-- [✅] Database connection
-- [✅] Database schema
-- [ ] Auth routes (register + login)
-- [ ] JWT implementation
-- [ ] Candidate CRUD
-- [ ] Frontend login page
+✅ Folder structure
+✅ Express server running
+✅ Environment variables
+✅ Database connected
+✅ Database schema
+✅ Register endpoint
+✅ Login endpoint
+⬜ Auth middleware (protect routes)
+⬜ Candidate CRUD
+⬜ Frontend login page
