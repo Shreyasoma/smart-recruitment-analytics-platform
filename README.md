@@ -139,6 +139,9 @@ Foreign key rules:
 ✅ Database schema
 ✅ Register endpoint
 ✅ Login endpoint
-⬜ Auth middleware (protect routes)
-⬜ Candidate CRUD
+✅ Auth middleware
+✅ Role middleware
+✅ Candidate CRUD
 ⬜ Frontend login page
+⬜ Frontend candidates page
+⬜ Frontend dashboard
