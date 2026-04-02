@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Recruitment Platform — Candidates</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <form>
+      <h1>Add Candidate</h1>
+      <label>Name</label>
+      <input type="text" placeholder="Name" id="name" /><br />
+      <label>Email</label>
+      <input type="email" placeholder="Email" id="email" /><br />
+      <label>Score</label>
+      <input type="number" placeholder="Score" id="score" /><br />
+      <label>Status:</label>
+      <select name="status" id="status">
+        <option value="applied">Applied</option>
+        <option value="interviewing">Interviewing</option>
+        <option value="hired">Hired</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <br />
+      <label>Skills</label>
+      <input type="text" placeholder="Skills" id="skills" /><br />
+      <button type="button" id="add-candidate">Add Candidate</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Score</th>
+          <th>Status</th>
+          <th>Skills</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="candidates-table"></tbody>
+    </table>
+    <script src="../js/candidates.js"></script>
+  </body>
+</html>

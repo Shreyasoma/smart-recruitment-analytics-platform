@@ -142,6 +142,6 @@ Foreign key rules:
 ✅ Auth middleware
 ✅ Role middleware
 ✅ Candidate CRUD
-⬜ Frontend login page
-⬜ Frontend candidates page
+✅ Frontend login page
+✅ Frontend candidates page
 ⬜ Frontend dashboard
