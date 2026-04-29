@@ -30,6 +30,14 @@ document.getElementById('add-candidate').onclick = async function () {
   const status = document.getElementById('status').value;
   const skills = document.getElementById('skills').value;
   const skillsArray = skills.split(',').map((s) => s.trim());
+  if (!name || !email || !score || !status || !skills) {
+    alert('All fields are required');
+    return;
+  }
+  if (score < 0 || score > 100) {
+    alert('Score must be between 0 and 100');
+    return;
+  }
   await fetch('http://localhost:3000/api/candidates', {
     method: 'POST',
     headers: {

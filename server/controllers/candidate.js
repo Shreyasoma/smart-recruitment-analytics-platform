@@ -5,6 +5,21 @@ const createCandidate = async (req, res) => {
     // Step 1 — get data from req.body
     const { name, email, score, status, skills } = req.body;
     const recruiter_id = req.user.id;
+    if (!name || !email || !score || !status || !skills) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    if (score < 0 || score > 100) {
+      return res
+        .status(400)
+        .json({ message: 'Score must be between 0 and 100' });
+    }
+
+    if (!Array.isArray(skills) || skills.length === 0) {
+      return res
+        .status(400)
+        .json({ message: 'At least one skill is required' });
+    }
     // Step 2 — insert into candidates table
     const newCandidate = await db.query(
       'INSERT INTO candidates (name, email, score, status, recruiter_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
