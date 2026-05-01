@@ -60,7 +60,7 @@ smart-recruitment-analytics-platform/
 1. Clone the repository
 
 ```
-git clone <your-repo-url>
+git clone https://github.com/Shreyasoma/smart-recruitment-analytics-platform
 ```
 
 2. Install backend dependencies
