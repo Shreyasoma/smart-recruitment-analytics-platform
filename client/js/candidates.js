@@ -16,9 +16,10 @@ const loadCandidates = async () => {
         <td>${candidate.name}</td>
         <td>${candidate.email}</td>
         <td>${candidate.score}</td>
-        <td>${candidate.status}</td>
-        <td>${candidate.id}</td>
-        <td><button onclick="deleteCandidate(${candidate.id})">Delete</button></td>
+        <td><span class="badge badge-${candidate.status}">${candidate.status}</span></td>
+        <td>
+          <button class="btn btn-danger" onclick="deleteCandidate(${candidate.id})">Delete</button>
+        </td>
       </tr>`;
   });
 };
@@ -29,15 +30,19 @@ document.getElementById('add-candidate').onclick = async function () {
   const score = document.getElementById('score').value;
   const status = document.getElementById('status').value;
   const skills = document.getElementById('skills').value;
-  const skillsArray = skills.split(',').map((s) => s.trim());
+
   if (!name || !email || !score || !status || !skills) {
     alert('All fields are required');
     return;
   }
+
   if (score < 0 || score > 100) {
     alert('Score must be between 0 and 100');
     return;
   }
+
+  const skillsArray = skills.split(',').map((s) => s.trim());
+
   await fetch('http://localhost:3000/api/candidates', {
     method: 'POST',
     headers: {
@@ -46,10 +51,17 @@ document.getElementById('add-candidate').onclick = async function () {
     },
     body: JSON.stringify({ name, email, score, status, skills: skillsArray }),
   });
+
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('score').value = '';
+  document.getElementById('skills').value = '';
+
   loadCandidates();
 };
 
 const deleteCandidate = async (id) => {
+  if (!confirm('Are you sure you want to delete this candidate?')) return;
   await fetch(`http://localhost:3000/api/candidates/${id}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },

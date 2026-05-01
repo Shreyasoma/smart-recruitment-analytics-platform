@@ -6,15 +6,71 @@
     <title>Smart Recruitment Platform — Dashboard</title>
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Dashboard</h1>
-    <div class="total-candidates" id="total-candidates"></div>
-    <div class="avg-score" id="avg-score"></div>
-    <div class="hired-count" id="hired-count"></div>
-    <div class="rejected-count" id="rejected-count"></div>
-    <canvas id="status-chart"></canvas>
-    <canvas id="skills-chart"></canvas>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <span class="navbar-brand">⚡ RecruitIQ</span>
+      <div class="navbar-links">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="candidates.html">Candidates</a>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Your recruitment analytics at a glance</p>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Candidates</div>
+          <div class="stat-value" id="total-candidates">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Average Score</div>
+          <div class="stat-value" id="avg-score">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hired</div>
+          <div class="stat-value" id="hired-count">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Rejected</div>
+          <div class="stat-value" id="rejected-count">—</div>
+        </div>
+      </div>
+
+      <!-- CHARTS -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Candidates by Status</h3>
+          <canvas id="status-chart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Top Skills</h3>
+          <canvas id="skills-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
     <script src="../js/dashboard.js"></script>
+    <script>
+      function logout() {
+        localStorage.removeItem('token');
+        window.location.href = '../index.html';
+      }
+    </script>
   </body>
 </html>

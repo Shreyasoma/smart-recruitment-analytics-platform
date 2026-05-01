@@ -5,41 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Recruitment Platform — Candidates</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <form>
-      <h1>Add Candidate</h1>
-      <label>Name</label>
-      <input type="text" placeholder="Name" id="name" /><br />
-      <label>Email</label>
-      <input type="email" placeholder="Email" id="email" /><br />
-      <label>Score</label>
-      <input type="number" placeholder="Score" id="score" /><br />
-      <label>Status:</label>
-      <select name="status" id="status">
-        <option value="applied">Applied</option>
-        <option value="interviewing">Interviewing</option>
-        <option value="hired">Hired</option>
-        <option value="rejected">Rejected</option>
-      </select>
-      <br />
-      <label>Skills</label>
-      <input type="text" placeholder="Skills" id="skills" /><br />
-      <button type="button" id="add-candidate">Add Candidate</button>
-    </form>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Score</th>
-          <th>Status</th>
-          <th>Skills</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="candidates-table"></tbody>
-    </table>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <span class="navbar-brand">⚡ RecruitIQ</span>
+      <div class="navbar-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="candidates.html" class="active">Candidates</a>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <h1>Candidates</h1>
+        <p>Manage your recruitment pipeline</p>
+      </div>
+
+      <!-- ADD CANDIDATE FORM -->
+      <div class="add-candidate-card">
+        <h2>Add New Candidate</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="John Doe" id="name" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@company.com" id="email" />
+          </div>
+          <div class="form-group">
+            <label>Score</label>
+            <input
+              type="number"
+              placeholder="0 - 100"
+              id="score"
+              min="0"
+              max="100"
+            />
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="status">
+              <option value="applied">Applied</option>
+              <option value="interviewing">Interviewing</option>
+              <option value="hired">Hired</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <input
+              type="text"
+              placeholder="JavaScript, Python, SQL"
+              id="skills"
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          id="add-candidate"
+          style="width: auto; padding: 0.875rem 2rem"
+        >
+          Add Candidate
+        </button>
+      </div>
+
+      <!-- CANDIDATES TABLE -->
+      <div class="table-card">
+        <div class="table-header">
+          <h2>All Candidates</h2>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="candidates-table"></tbody>
+        </table>
+      </div>
+    </div>
+
     <script src="../js/candidates.js"></script>
+    <script>
+      function logout() {
+        localStorage.removeItem('token');
+        window.location.href = '../index.html';
+      }
+    </script>
   </body>
 </html>

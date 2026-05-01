@@ -8,19 +8,21 @@ const loadDashboard = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   const data = await response.json();
-  console.log(data);
-  document.getElementById('total-candidates').textContent =
-    `Total Candidates: ${data.total.count}`;
-  document.getElementById('avg-score').textContent =
-    `Average Score: ${parseFloat(data.avgScore.avg).toFixed(2)}`;
+
+  // stat cards
+  document.getElementById('total-candidates').textContent = data.total.count;
+  document.getElementById('avg-score').textContent = parseFloat(
+    data.avgScore.avg,
+  ).toFixed(1);
 
   const hired = data.byStatus.find((s) => s.status === 'hired');
   const rejected = data.byStatus.find((s) => s.status === 'rejected');
-  document.getElementById('hired-count').textContent =
-    `Hired: ${hired ? hired.count : 0}`;
-  document.getElementById('rejected-count').textContent =
-    `Rejected: ${rejected ? rejected.count : 0}`;
-  // Status chart
+  document.getElementById('hired-count').textContent = hired ? hired.count : 0;
+  document.getElementById('rejected-count').textContent = rejected
+    ? rejected.count
+    : 0;
+
+  // status chart
   const statusLabels = data.byStatus.map((s) => s.status);
   const statusCounts = data.byStatus.map((s) => parseInt(s.count));
 
@@ -30,15 +32,34 @@ const loadDashboard = async () => {
       labels: statusLabels,
       datasets: [
         {
-          label: 'Candidates by Status',
+          label: 'Candidates',
           data: statusCounts,
-          backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#F44336'],
+          backgroundColor: ['#6C63FF', '#FF6584', '#43E97B', '#FCD34D'],
+          borderRadius: 8,
+          borderSkipped: false,
         },
       ],
     },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+      },
+      scales: {
+        x: {
+          ticks: { color: '#A7A9BE' },
+          grid: { color: 'rgba(108, 99, 255, 0.1)' },
+        },
+        y: {
+          ticks: { color: '#A7A9BE' },
+          grid: { color: 'rgba(108, 99, 255, 0.1)' },
+          beginAtZero: true,
+        },
+      },
+    },
   });
 
-  // Skills chart
+  // skills chart
   const skillLabels = data.topSkills.map((s) => s.skill);
   const skillCounts = data.topSkills.map((s) => parseInt(s.count));
 
@@ -48,11 +69,27 @@ const loadDashboard = async () => {
       labels: skillLabels,
       datasets: [
         {
-          label: 'Top Skills',
           data: skillCounts,
-          backgroundColor: ['#9C27B0', '#00BCD4', '#FF5722'],
+          backgroundColor: [
+            '#6C63FF',
+            '#FF6584',
+            '#43E97B',
+            '#FCD34D',
+            '#60A5FA',
+          ],
+          borderWidth: 0,
+          hoverOffset: 8,
         },
       ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: '#A7A9BE', padding: 20, usePointStyle: true },
+        },
+      },
     },
   });
 };
