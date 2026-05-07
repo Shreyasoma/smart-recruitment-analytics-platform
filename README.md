@@ -122,6 +122,5 @@ Foreign key rules:
 - Role-based authentication (Admin / Recruiter)
 - Candidate management with scores and skills
 - Dashboard with analytics and charts
-- Pagination, filtering, and search
 - Analytics export
 - ML-based candidate selection probability (bonus)

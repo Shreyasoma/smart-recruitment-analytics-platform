@@ -44,7 +44,18 @@ const createCandidate = async (req, res) => {
 
 const getAllCandidates = async (req, res) => {
   try {
-    const getCandidate = await db.query('SELECT * FROM candidates');
+    const role = req.user.role;
+    const id = req.user.id;
+    let getCandidate;
+
+    if (role === 'recruiter') {
+      getCandidate = await db.query(
+        'SELECT * FROM candidates WHERE recruiter_id = $1',
+        [id],
+      );
+    } else {
+      getCandidate = await db.query('SELECT * FROM candidates');
+    }
     return res.status(200).json({
       candidate: getCandidate.rows,
     });
