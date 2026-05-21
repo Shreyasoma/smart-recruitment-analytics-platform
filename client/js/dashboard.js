@@ -3,7 +3,7 @@ const token = localStorage.getItem('token');
 if (!token) window.location.href = '../index.html';
 
 const loadDashboard = async () => {
-  const response = await fetch('http://localhost:3000/api/analytics', {
+  const response = await fetch('http://localhost:5000/api/analytics', {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
   });

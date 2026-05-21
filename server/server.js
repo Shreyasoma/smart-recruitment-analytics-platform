@@ -10,7 +10,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/candidates', authMiddleware, require('./routes/candidate'));
 app.use('/api/analytics', authMiddleware, require('./routes/analytics'));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
   res.send('Backend server is running!!');

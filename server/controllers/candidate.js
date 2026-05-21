@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const axios = require('axios');
 
 const createCandidate = async (req, res) => {
   try {
@@ -117,10 +118,53 @@ const deleteCandidate = async (req, res) => {
   }
 };
 
+const predictCandidate = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Get candidate's score from DB
+    const result = await db.query(
+      'SELECT score FROM candidates WHERE id = $1',
+      [id],
+    );
+
+    if (result.rows.length === 0)
+      return res.status(404).json({ message: 'Candidate not found' });
+
+    const score = result.rows[0].score;
+
+    // Call Flask analytics service
+    const flaskResponse = await axios.post('http://localhost:5001/predict', {
+      score: score,
+    });
+
+    return res.status(200).json({
+      candidate_id: id,
+      score: score,
+      hire_probability: flaskResponse.data.hire_probability,
+      prediction: flaskResponse.data.prediction,
+    });
+  } catch (error) {
+    console.log('Predict error:', error.message);
+    if (error.response) {
+      console.log('Flask error response:', error.response.data);
+    }
+    if (error.code === 'ECONNREFUSED') {
+      return res
+        .status(503)
+        .json({ message: 'Analytics service is unavailable' });
+    }
+    return res
+      .status(500)
+      .json({ message: error.response?.data?.error || error.message });
+  }
+};
+
 module.exports = {
   createCandidate,
   getAllCandidates,
   getCandidateById,
   updateCandidate,
   deleteCandidate,
+  predictCandidate,
 };
