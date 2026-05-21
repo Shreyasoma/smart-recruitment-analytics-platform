@@ -5,7 +5,7 @@ if (!token) window.location.href = '../index.html';
 // ===== LOAD ALL CANDIDATES =====
 
 const loadCandidates = async () => {
-  const response = await fetch('http://localhost:5000/api/candidates', {
+  const response = await fetch('${API_BASE_URL}/api/candidates', {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -37,7 +37,7 @@ const predictCandidate = async (id) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/candidates/${id}/predict`,
+      `${API_BASE_URL}/api/candidates/${id}/predict`,
       {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -78,7 +78,7 @@ document.getElementById('add-candidate').onclick = async function () {
 
   const skillsArray = skills.split(',').map((s) => s.trim());
 
-  await fetch('http://localhost:5000/api/candidates', {
+  await fetch('${API_BASE_URL}/api/candidates', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ document.getElementById('add-candidate').onclick = async function () {
 
 const deleteCandidate = async (id) => {
   if (!confirm('Are you sure you want to delete this candidate?')) return;
-  await fetch(`http://localhost:5000/api/candidates/${id}`, {
+  await fetch(`${API_BASE_URL}/api/candidates/${id}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -148,7 +148,7 @@ document.getElementById('save-edit').onclick = async function () {
     return;
   }
 
-  await fetch(`http://localhost:5000/api/candidates/${id}`, {
+  await fetch(`${API_BASE_URL}/api/candidates/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
