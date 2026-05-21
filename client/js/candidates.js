@@ -162,4 +162,10 @@ document.getElementById('save-edit').onclick = async function () {
 };
 
 // ===== INIT =====
+// ===== INIT =====
+// Wake up analytics service on page load
+fetch('https://smart-recruitment-analytics.onrender.com/health').catch(
+  () => {},
+);
+
 loadCandidates();
