@@ -5,7 +5,7 @@ if (!token) window.location.href = '../index.html';
 // ===== LOAD ALL CANDIDATES =====
 
 const loadCandidates = async () => {
-  const response = await fetch('${API_BASE_URL}/api/candidates', {
+  const response = await fetch(`${API_BASE_URL}/api/candidates`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -78,7 +78,7 @@ document.getElementById('add-candidate').onclick = async function () {
 
   const skillsArray = skills.split(',').map((s) => s.trim());
 
-  await fetch('${API_BASE_URL}/api/candidates', {
+  await fetch(`${API_BASE_URL}/api/candidates`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
