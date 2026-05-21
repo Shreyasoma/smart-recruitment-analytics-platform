@@ -3,16 +3,20 @@ import psycopg2
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 import numpy as np
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host="localhost",
-        database="smart_recruitment_db",
-        user="postgres",
-        password="Shreya@1410",
-        port=5433
+        host=os.getenv('DB_HOST', 'localhost'),
+        database=os.getenv('DB_NAME', 'smart_recruitment_db'),
+        user=os.getenv('DB_USER', 'postgres'),
+        password=os.getenv('DB_PASSWORD', 'Shreya@1410'),
+        port=os.getenv('DB_PORT', 5433)
     )
     return conn
 
@@ -45,7 +49,6 @@ def predict():
         if score is None:
             return jsonify({'error': 'score is required'}), 400
 
-        # Force score to float
         score = float(score)
 
         df = train_model()
@@ -56,7 +59,6 @@ def predict():
         if df['status'].nunique() < 2:
             return jsonify({'error': 'Need both hired and rejected candidates in the data to train the model.'}), 400
 
-        # Force score column to numeric, drop any bad rows
         df['score'] = pd.to_numeric(df['score'], errors='coerce')
         df = df.dropna(subset=['score'])
 
