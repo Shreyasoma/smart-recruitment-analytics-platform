@@ -134,7 +134,7 @@ const predictCandidate = async (req, res) => {
     const score = result.rows[0].score;
 
     // Call Flask analytics service
-    const flaskResponse = await axios.post('http://localhost:5001/predict', {
+    const flaskResponse = await axios.post(`${process.env.FLASK_URL}/predict`, {
       score: score,
     });
 
