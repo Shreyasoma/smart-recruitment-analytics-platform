@@ -72,6 +72,11 @@ smart-recruitment-analytics-platform/
 ```
 
 ---
+## **Live Demo Link**
+https://smart-recruitment-analytics-platform.netlify.app
+---
+
+---
 
 ## Database Schema
 
@@ -199,11 +204,4 @@ The analytics service trains a logistic regression model on existing `hired` and
   "prediction": "hired"
 }
 ```
-## Live Demo
 
-| Service | URL |
-|---|---|
-| Frontend | https://smart-recruitment-analytics-platform.netlify.app |
-| Backend API | https://smart-recruitment-backend-x5nx.onrender.com |
-| ML Analytics Service | https://smart-recruitment-analytics.onrender.com |
-The Node.js backend proxies this through `POST /api/candidates/:id/predict`, fetching the candidate's score from PostgreSQL and forwarding it to Flask.
