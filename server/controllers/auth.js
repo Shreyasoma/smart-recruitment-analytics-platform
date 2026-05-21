@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
   try {
-    // Step 1 — get name, email, password from request body
-    const { name, email, password } = req.body;
+    // Step 1 — get name, email, password, role from request body
+    const { name, email, password, role } = req.body;
     // Step 2 — check if email exists
     const result = await db.query('SELECT * FROM users WHERE email = $1', [
       email,
@@ -16,8 +16,8 @@ const register = async (req, res) => {
     // Step 4 — hash password, insert user
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await db.query(
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [name, email, hashedPassword],
+      'INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *',
+      [name, email, hashedPassword, role],
     );
     // Step 5 — send back token
     const token = jwt.sign(
@@ -27,7 +27,8 @@ const register = async (req, res) => {
     );
     return res.status(201).json({ token });
   } catch (error) {
-    return res.status(500).json({ message: 'Server error' });
+    console.error('Register error:', error.message);
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -55,7 +56,8 @@ const login = async (req, res) => {
     );
     return res.status(200).json({ token });
   } catch (error) {
-    return res.status(500).json({ message: 'Server error' });
+    console.error('Login error:', error.message);
+    return res.status(500).json({ message: error.message });
   }
 };
 
