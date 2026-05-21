@@ -132,7 +132,7 @@ const predictCandidate = async (req, res) => {
       return res.status(404).json({ message: 'Candidate not found' });
 
     const score = result.rows[0].score;
-
+    console.log('FLASK_URL:', process.env.FLASK_URL);
     // Call Flask analytics service
     const flaskResponse = await axios.post(`${process.env.FLASK_URL}/predict`, {
       score: score,
