@@ -8,13 +8,13 @@ Built as a portfolio project targeting placements at companies like Persistent, 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | HTML, CSS, JavaScript |
-| Backend | Node.js + Express |
-| Database | PostgreSQL |
-| Auth | JWT + bcrypt |
-| Charts | Chart.js |
+| Layer        | Technology                          |
+| ------------ | ----------------------------------- |
+| Frontend     | HTML, CSS, JavaScript               |
+| Backend      | Node.js + Express                   |
+| Database     | PostgreSQL                          |
+| Auth         | JWT + bcrypt                        |
+| Charts       | Chart.js                            |
 | ML Analytics | Python, Flask, Pandas, scikit-learn |
 
 ---
@@ -76,13 +76,16 @@ smart-recruitment-analytics-platform/
 ## Database Schema
 
 **users**
+
 - `id`, `name`, `email`, `password` (bcrypt), `role` (ENUM: admin/recruiter), `created_at`, `updated_at`
 
 **candidates**
+
 - `id`, `name`, `email`, `score`, `status` (ENUM: applied/interviewing/hired/rejected), `recruiter_id` (FK → users), `created_at`, `updated_at`
 - If recruiter deleted → `recruiter_id` set to NULL
-  
+
 **candidate_skills**
+
 - `id`, `candidate_id` (FK → candidates CASCADE), `skill`
 - If candidate deleted → skills deleted automatically
 
@@ -153,31 +156,35 @@ Open `client/index.html` in your browser directly, or serve it with Live Server.
 ## API Endpoints
 
 ### Auth
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login and receive JWT |
+
+| Method | Endpoint             | Description           |
+| ------ | -------------------- | --------------------- |
+| POST   | `/api/auth/register` | Register a new user   |
+| POST   | `/api/auth/login`    | Login and receive JWT |
 
 ### Candidates (protected)
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/candidates` | Get all candidates (role-filtered) |
-| POST | `/api/candidates` | Add a new candidate |
-| GET | `/api/candidates/:id` | Get candidate by ID |
-| PUT | `/api/candidates/:id` | Update candidate |
-| DELETE | `/api/candidates/:id` | Delete candidate |
-| POST | `/api/candidates/:id/predict` | Get ML hire probability |
+
+| Method | Endpoint                      | Description                        |
+| ------ | ----------------------------- | ---------------------------------- |
+| GET    | `/api/candidates`             | Get all candidates (role-filtered) |
+| POST   | `/api/candidates`             | Add a new candidate                |
+| GET    | `/api/candidates/:id`         | Get candidate by ID                |
+| PUT    | `/api/candidates/:id`         | Update candidate                   |
+| DELETE | `/api/candidates/:id`         | Delete candidate                   |
+| POST   | `/api/candidates/:id/predict` | Get ML hire probability            |
 
 ### Analytics (protected)
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/analytics` | Get aggregate stats |
+
+| Method | Endpoint         | Description         |
+| ------ | ---------------- | ------------------- |
+| GET    | `/api/analytics` | Get aggregate stats |
 
 ### ML Service (Flask — port 5001)
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/health` | Health check |
-| POST | `/predict` | Predict hire probability for a given score |
+
+| Method | Endpoint   | Description                                |
+| ------ | ---------- | ------------------------------------------ |
+| GET    | `/health`  | Health check                               |
+| POST   | `/predict` | Predict hire probability for a given score |
 
 ---
 
