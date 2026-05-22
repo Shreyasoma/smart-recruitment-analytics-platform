@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import psycopg2
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -9,6 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 def get_db_connection():
     conn = psycopg2.connect(
