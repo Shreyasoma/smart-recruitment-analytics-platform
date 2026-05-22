@@ -558,17 +558,115 @@ tbody tr:last-child td {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .stats-grid,
-  .form-grid,
-  .charts-grid {
-    flex-direction: column;
+  /* Navbar */
+  .navbar {
+    padding: 12px 15px;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .navbar-links a {
+    margin-right: 12px;
+    font-size: 0.85rem;
+  }
+
+  .logout-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Page */
   .page-content {
     padding: 15px;
   }
 
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Stat cards — stack vertically */
+  .stats-grid {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 18px 20px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  /* Charts — stack vertically, full width */
+  .charts-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .chart-card {
+    min-width: unset;
+    width: 100%;
+    padding: 18px;
+  }
+
+  /* Add candidate form */
+  .add-candidate-card {
+    padding: 18px;
+  }
+
+  .form-grid {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-grid .form-group {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Table — horizontal scroll on small screens */
+  .table-card {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+  th,
+  td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Modal */
+  .modal {
+    margin: 15px;
+    max-width: calc(100% - 30px);
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 18px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-links {
+    display: none;
+  }
+
   .navbar {
-    padding: 12px 15px;
+    justify-content: space-between;
+  }
+
+  .stat-value {
+    font-size: 20px;
   }
 }
