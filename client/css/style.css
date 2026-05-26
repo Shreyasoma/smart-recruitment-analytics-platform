@@ -658,12 +658,13 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 480px) {
-  .navbar-links {
-    display: none;
-  }
-
   .navbar {
     justify-content: space-between;
+  }
+
+  .navbar-links a {
+    margin-right: 8px;
+    font-size: 0.75rem;
   }
 
   .stat-value {
